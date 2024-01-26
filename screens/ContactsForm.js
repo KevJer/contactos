@@ -79,6 +79,10 @@ export const ContacsForm = ({ navigation, route }) => {
                 }}
             />
             <Button title="GUARDAR" onPress={isNew ? createContact : updateContact} />
+
+
+            {isNew && <View><Button title={"ELIMINAR"} /></View>}
+
         </View>
     );
 };
