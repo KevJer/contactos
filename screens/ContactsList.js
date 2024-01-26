@@ -44,10 +44,10 @@ export const ContactList = ({ navigation }) => {
             }}
         />
 
-        {/* <FAB
-        title="+"
-        onPress={() => {navigation.navigate("ContactsFormNav")}}
-        /> */}
+        <FAB
+            title="+"
+            onPress={() => { navigation.navigate("ContactsFormNav") }}
+        />
     </View>
 }
 
