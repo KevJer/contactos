@@ -2,6 +2,7 @@ import { View, Text, StyleSheet, Alert } from "react-native";
 import { Input, Button } from "@rneui/base";
 import { useState, useEffect } from "react";
 import {
+    deleteContactRest,
     saveContactRest,
     updateContactRest,
 } from "../rest_client/contactos.js";
@@ -23,10 +24,10 @@ export const ContacsForm = ({ navigation, route }) => {
     );
 
     // Funcion para refewscar mensajes
-    const showMessage = () => {
+    const showMessage = (messaje) => {
         Alert.alert(
             "CONFIRMACION",
-            isNew ? "Se creo el Contacto" : "Contanto Actualizado"
+            messaje
         );
         navigation.goBack();
     };
@@ -55,6 +56,19 @@ export const ContacsForm = ({ navigation, route }) => {
         );
     };
 
+    const confirmContact = () => {
+        Alert.alert("CONFIRMACION", "Esta seguro que quiere eliminar", [
+            {
+                text: "Si",
+                onPress: deleteContact,
+            },
+            { text: "Cancelar" },
+        ]);
+    };
+    const deleteContact = () => {
+        console.log("BORARANDO EL CONTACTO");
+        deleteContactRest({ id: contactRetrieved }, showMessage);
+    };
     return (
         <View style={styles.container}>
             <Input
@@ -80,9 +94,11 @@ export const ContacsForm = ({ navigation, route }) => {
             />
             <Button title="GUARDAR" onPress={isNew ? createContact : updateContact} />
 
-
-            {isNew && <View><Button title={"ELIMINAR"} /></View>}
-
+            {isNew ? (
+                <View></View>
+            ) : (
+                <Button title={"ELIMINAR"} onPress={confirmContact} />
+            )}
         </View>
     );
 };
