@@ -11,16 +11,16 @@ import { useState, useEffect } from "react";
 import { getAllContacts } from "../rest_client/contactos.js";
 
 // DEfinicion del componente
-export const ContactList = ({ navigation }) => {
+export const ContactsList = ({ navigation }) => {
     // Es una variable de estado
     // Se cre aun objeto para ver que tal
     const [contactsList, setContactList] = useState([]);
 
 
-    useEffect(() => {
-        // console.log("Ejecuto la funcion de useEffect");
-        getAllContacts(fnRefreshList)
-    }, [])
+    // useEffect(() => {
+    //     // console.log("Ejecuto la funcion de useEffect");
+    //     getAllContacts(fnRefreshList)
+    // }, [])
 
     // Funcion que retorne un dir
     const ContacItem = ({ contac }) => {

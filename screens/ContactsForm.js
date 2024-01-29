@@ -32,7 +32,7 @@ export const ContacsForm = ({ navigation, route }) => {
         navigation.goBack();
     };
 
-    const createContact = () => {
+    const saveContact = () => {
         console.log("SaveContact");
         saveContactRest(
             {
@@ -92,7 +92,7 @@ export const ContacsForm = ({ navigation, route }) => {
                     setPhoneNumber(value);
                 }}
             />
-            <Button title="GUARDAR" onPress={isNew ? createContact : updateContact} />
+            <Button title="GUARDAR" onPress={isNew ? saveContact : updateContact} />
 
             {isNew ? (
                 <View></View>

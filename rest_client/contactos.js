@@ -1,12 +1,25 @@
 //const IP = "192.168.1.5";
-const IP = "192.168.1.5";
+const IP = "192.168.100.32";
 const PORT = 3001;
 const URL = "http://" + IP + ":" + PORT + "/";
 
+
+// http://192.168.100.32:3001/contactos
+
 export const getAllContacts = (fnRefreshList) => {
     console.log("getAllContacts..");
+    // fetch(
+    //     URL + "contactos"
+    // ).then(
+    //     (repsonse => repsonse.json())
+    // ).then(
+    //     (body) => {
+    //         console.log(body);
+    //     }
+    // )
     fetch(URL + "contactos")
         .then((response) => {
+            console.log("ssssssssssssss");
             return response.json();
         })
         .then((body) => {
@@ -28,8 +41,8 @@ export const saveContactRest = (contac, fnShowMessage) => {
         }),
     };
     fetch(URL + "contactos", config)
-        .then((repsonse) => repsonse.json())
-        .then((body) => {
+        .then(repsonse => repsonse.json())
+        .then(body => {
             fnShowMessage("Se ha creado el mensaje");
             console.log(body);
         });
