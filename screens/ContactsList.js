@@ -9,15 +9,23 @@ import {
 import { Button, ListItem, FAB } from "@rneui/base";
 import { useState, useEffect } from "react";
 import { getAllContacts } from "../rest_client/contactos.js";
+import { useContext } from "react";
+import { UserContext } from "../context/Contex.js";
 
 // DEfinicion del componente
 export const ContactsList = ({ navigation }) => {
+
+    const { user } = useContext(UserContext)
+
     // Es una variable de estado
     // Se cre aun objeto para ver que tal
     const [contactsList, setContactList] = useState([]);
 
 
     useEffect(() => {
+        console.log("---------------");
+        console.log(user);
+        console.log("---------------");
         // console.log("Ejecuto la funcion de useEffect");
         getAllContacts(fnRefreshList)
     }, [])
