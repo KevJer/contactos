@@ -17,10 +17,10 @@ export const ContactsList = ({ navigation }) => {
     const [contactsList, setContactList] = useState([]);
 
 
-    // useEffect(() => {
-    //     // console.log("Ejecuto la funcion de useEffect");
-    //     getAllContacts(fnRefreshList)
-    // }, [])
+    useEffect(() => {
+        // console.log("Ejecuto la funcion de useEffect");
+        getAllContacts(fnRefreshList)
+    }, [])
 
     // Funcion que retorne un dir
     const ContacItem = ({ contac }) => {
