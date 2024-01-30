@@ -9,14 +9,16 @@ import { UserState } from "./context/States";
 export default function App() {
   const StackConcts = createNativeStackNavigator();
   return (
+    <UserState>
     <NavigationContainer>
       <StackConcts.Navigator initialRouteName="ContactsListNav">
-        <UserState>
+       
           <StackConcts.Screen name="ContactsListNav" component={ContactsList} />
           <StackConcts.Screen name="ContactsFormNav" component={ContacsForm} />
-        </UserState>
+       
       </StackConcts.Navigator>
     </NavigationContainer>
+    </UserState>
   );
 }
 

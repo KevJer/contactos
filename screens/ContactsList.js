@@ -15,7 +15,7 @@ import { UserContext } from "../context/Contex.js";
 // DEfinicion del componente
 export const ContactsList = ({ navigation }) => {
 
-    const { user } = useContext(UserContext)
+    const { user, hanldeInformation  } = useContext(UserContext)
 
     // Es una variable de estado
     // Se cre aun objeto para ver que tal
@@ -24,13 +24,19 @@ export const ContactsList = ({ navigation }) => {
 
     useEffect(() => {
         console.log("---------------");
-        console.log(user);
+        console.log("Usuario actualizado dentro de useEffect:", user);
         console.log("---------------");
         // console.log("Ejecuto la funcion de useEffect");
         getAllContacts(fnRefreshList)
-    }, [])
+    }, [user])
 
-    // Funcion que retorne un dir
+    const actualizarUsuario = () => {
+        const nuevoUsuario = {
+          nombre: "NOMBRE",
+          apellido: "APELLIDO",
+        };
+        hanldeInformation(nuevoUsuario);
+      };
     const ContacItem = ({ contac }) => {
         return (
             <TouchableHighlight onPress={() => {
@@ -58,9 +64,7 @@ export const ContactsList = ({ navigation }) => {
             <Text>LISTA DE CONTACTOS!</Text>
             <Button
                 title="Consultar"
-                onPress={() => {
-                    getAllContacts(fnRefreshList);
-                }}
+                onPress={actualizarUsuario}
             />
             <FlatList
                 data={contactsList}
