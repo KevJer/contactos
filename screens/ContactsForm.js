@@ -1,11 +1,12 @@
 import { View, Text, StyleSheet, Alert } from "react-native";
 import { Input, Button } from "@rneui/base";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import {
     deleteContactRest,
     saveContactRest,
     updateContactRest,
 } from "../rest_client/contactos.js";
+import { UserContext } from "../context/Contex.js";
 
 export const ContacsForm = ({ navigation, route }) => {
     let contactRetrieved = route.params.contacParam;
@@ -13,6 +14,9 @@ export const ContacsForm = ({ navigation, route }) => {
     if (contactRetrieved != true) {
         isNew = false;
     }
+    const { user, hanldeInformation } = useContext(UserContext)
+
+    const [infomationUser, setInfomationUser] = useState({ nombre: user?.nombre ? "" : null })
 
     // Variable de estado
     const [name, setName] = useState(isNew ? null : contactRetrieved.nombre);
@@ -69,6 +73,15 @@ export const ContacsForm = ({ navigation, route }) => {
         console.log("BORARANDO EL CONTACTO");
         deleteContactRest({ id: contactRetrieved }, showMessage);
     };
+
+    const handelNombre = (value) => {
+        let validacion = value
+        setInfomationUser({
+            ...infomationUser,
+            nombre: validacion
+        })
+    }
+
     return (
         <View style={styles.container}>
             <Input
@@ -78,6 +91,12 @@ export const ContacsForm = ({ navigation, route }) => {
                     setName(value);
                 }}
             />
+            <Input
+                value={infomationUser.nombre ? infomationUser.nombre : ""}
+                label={nombre}
+                onChangeText={(value) => {
+                    handelNombre(value)
+                }} />
             <Input
                 value={surname}
                 placeholder="APELLIDO"
