@@ -1,5 +1,5 @@
-import { HANLDE_INFORMATION } from "./Types";
 
+import { HANLDE_INFORMATION } from "./Types";
 
 
 export const UserReducer = (state, action) => {

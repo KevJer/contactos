@@ -15,16 +15,17 @@ import { UserContext } from "../context/Contex.js";
 // DEfinicion del componente
 export const ContactsList = ({ navigation }) => {
 
-    const { user } = useContext(UserContext)
+    const { user, hanldeInformation } = useContext(UserContext)
 
     // Es una variable de estado
     // Se cre aun objeto para ver que tal
     const [contactsList, setContactList] = useState([]);
 
 
+
     useEffect(() => {
         console.log("---------------");
-        console.log(user);
+        console.log(user?.nombre);
         console.log("---------------");
         // console.log("Ejecuto la funcion de useEffect");
         getAllContacts(fnRefreshList)

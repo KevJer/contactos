@@ -1,12 +1,10 @@
-import React, { Children, useMemo, useReducer } from "react";
+import React, { useMemo, useReducer } from "react";
 import { UserReducer } from "./Reducer";
 import { HANLDE_INFORMATION } from "./Types";
 import { UserContext } from "./Contex";
 
 
-
-
-export const UserState = ({ Children }) => {
+export const UserState = ({ children }) => {
 
     const initialValues = useMemo(
         () => ({
@@ -19,10 +17,11 @@ export const UserState = ({ Children }) => {
         dispatch({ type: HANLDE_INFORMATION, payload: data });
     }, []);
 
+
     return (
         <UserContext.Provider
             value={{ ...state, ...{ hanldeInformation } }}>
-            {Children}
+            {children}
         </UserContext.Provider>
     )
 }

@@ -11,12 +11,16 @@ import { UserContext } from "../context/Contex.js";
 export const ContacsForm = ({ navigation, route }) => {
     let contactRetrieved = route.params.contacParam;
     let isNew = true;
-    if (contactRetrieved != true) {
+    if (contactRetrieved != null) {
         isNew = false;
     }
-    const { user, hanldeInformation } = useContext(UserContext)
+    const { user, hanldeInformation } = useContext(UserContext);
 
-    const [infomationUser, setInfomationUser] = useState({ nombre: user?.nombre ? "" : null })
+    const [infomationUser, setInfomationUser] = useState({
+        nombre: user?.nombre ? "" : null,
+        apellido: user?.apellido ? "" : null,
+        celular: user?.celular ? "" : null,
+    });
 
     // Variable de estado
     const [name, setName] = useState(isNew ? null : contactRetrieved.nombre);
@@ -27,12 +31,13 @@ export const ContacsForm = ({ navigation, route }) => {
         isNew ? null : contactRetrieved.celular
     );
 
+    useEffect(() => {
+        console.log(" GUARDANDO", infomationUser);
+    });
+
     // Funcion para refewscar mensajes
     const showMessage = (messaje) => {
-        Alert.alert(
-            "CONFIRMACION",
-            messaje
-        );
+        Alert.alert("CONFIRMACION", messaje);
         navigation.goBack();
     };
 
@@ -40,9 +45,9 @@ export const ContacsForm = ({ navigation, route }) => {
         console.log("SaveContact");
         saveContactRest(
             {
-                name: name,
-                surname: surname,
-                phoneNumber: phoneNumber,
+                name: infomationUser.nombre,
+                surname: infomationUser.apellido,
+                phoneNumber: infomationUser.celular,
             },
             showMessage
         );
@@ -75,43 +80,71 @@ export const ContacsForm = ({ navigation, route }) => {
     };
 
     const handelNombre = (value) => {
-        let validacion = value
+        let validacion = value;
         setInfomationUser({
             ...infomationUser,
-            nombre: validacion
-        })
-    }
+            nombre: validacion,
+        });
+    };
 
+    const handelApellido = (value) => {
+        let validacion = value;
+        setInfomationUser({
+            ...infomationUser,
+            apellido: validacion,
+        });
+    };
+
+    const handelPhoneNumbre = (value) => {
+        let validacion = value;
+        setInfomationUser({
+            ...infomationUser,
+            celular: validacion,
+        });
+    };
+
+    const createUser = () => {
+        isNew ? saveContact() : updateContact();
+        try {
+            let userInformation = {
+                ...infomationUser,
+                nombre: infomationUser.nombre,
+            };
+            let updateData = user
+                ? { ...user, ...userInformation.nombre }
+                : userInformation;
+
+            hanldeInformation(updateData);
+        } catch (error) {
+            console.log("ERROR EN CREATE USER: ", e);
+        }
+    };
     return (
         <View style={styles.container}>
-            <Input
-                value={name}
-                placeholder="NOMBRE"
-                onChangeText={(value) => {
-                    setName(value);
-                }}
-            />
+
             <Input
                 value={infomationUser.nombre ? infomationUser.nombre : ""}
-                label={nombre}
+                placeholder="NOMBRE"
                 onChangeText={(value) => {
-                    handelNombre(value)
-                }} />
+                    handelNombre(value);
+                }}
+            />
             <Input
-                value={surname}
+                value={infomationUser.apellido ? infomationUser.apellido : ""}
                 placeholder="APELLIDO"
                 onChangeText={(value) => {
-                    setSurname(value);
+                    handelApellido(value);
+
                 }}
             />
             <Input
-                value={phoneNumber}
+                value={infomationUser.celular ? infomationUser.celular : ""}
                 placeholder="TELEFONO"
                 onChangeText={(value) => {
-                    setPhoneNumber(value);
+                    handelPhoneNumbre(value);
                 }}
             />
-            <Button title="GUARDAR" onPress={isNew ? saveContact : updateContact} />
+            <Button title="GUARDAR" onPress={createUser} />
 
             {isNew ? (
                 <View></View>
