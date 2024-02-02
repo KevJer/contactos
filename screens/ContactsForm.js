@@ -109,12 +109,14 @@ export const ContacsForm = ({ navigation, route }) => {
             let userInformation = {
                 ...infomationUser,
                 nombre: infomationUser.nombre,
+                apellido: infomationUser.apellido,
+                celular: infomationUser.celular,
             };
-            let updateData = user
-                ? { ...user, ...userInformation.nombre }
-                : userInformation;
+            let updateData = { ...user, userInformation: userInformation }
 
             hanldeInformation(updateData);
+            navigation.navigate("ContactsListNav");
+
         } catch (error) {
             console.log("ERROR EN CREATE USER: ", e);
         }
