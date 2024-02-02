@@ -115,7 +115,7 @@ export const ContacsForm = ({ navigation, route }) => {
             let updateData = { ...user, userInformation: userInformation }
 
             hanldeInformation(updateData);
-            navigation.navigate("ContactsListNav");
+            // navigation.navigate("ContactsListNav");
 
         } catch (error) {
             console.log("ERROR EN CREATE USER: ", e);
