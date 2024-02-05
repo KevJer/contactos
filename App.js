@@ -10,14 +10,12 @@ export default function App() {
   const StackConcts = createNativeStackNavigator();
   return (
     <UserState>
-    <NavigationContainer>
-      <StackConcts.Navigator initialRouteName="ContactsListNav">
-       
+      <NavigationContainer>
+        <StackConcts.Navigator initialRouteName="ContactsListNav">
           <StackConcts.Screen name="ContactsListNav" component={ContactsList} />
           <StackConcts.Screen name="ContactsFormNav" component={ContacsForm} />
-       
-      </StackConcts.Navigator>
-    </NavigationContainer>
+        </StackConcts.Navigator>
+      </NavigationContainer>
     </UserState>
   );
 }

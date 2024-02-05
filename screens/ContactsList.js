@@ -14,21 +14,25 @@ import { UserContext } from "../context/Contex.js";
 
 // DEfinicion del componente
 export const ContactsList = ({ navigation }) => {
-
-    const { user, hanldeInformation  } = useContext(UserContext)
+    const { user, hanldeInformation } = useContext(UserContext);
 
     // Es una variable de estado
     // Se cre aun objeto para ver que tal
     const [contactsList, setContactList] = useState([]);
 
-
     useEffect(() => {
         console.log("---------------");
-        console.log("Usuario actualizado dentro de useEffect:", user);
+        console.log(user?.userInformation?.apellido);
+        // console.log(user?.userInformation[0].nombre);
         console.log("---------------");
+
+
+        console.log("*******************");
+        console.log(user)
+        console.log("*******************");
         // console.log("Ejecuto la funcion de useEffect");
-        getAllContacts(fnRefreshList)
-    }, [user])
+        getAllContacts(fnRefreshList);
+    }, []);
 
     const actualizarUsuario = () => {
         const nuevoUsuario = {
@@ -39,9 +43,11 @@ export const ContactsList = ({ navigation }) => {
       };
     const ContacItem = ({ contac }) => {
         return (
-            <TouchableHighlight onPress={() => {
-                navigation.navigate("ContactsFormNav", { contacParam: contac })
-            }}>
+            <TouchableHighlight
+                onPress={() => {
+                    navigation.navigate("ContactsFormNav", { contacParam: contac });
+                }}
+            >
                 <ListItem>
                     <ListItem.Content>
                         <ListItem.Title>
@@ -73,6 +79,8 @@ export const ContactsList = ({ navigation }) => {
                 }}
             />
 
+            <Text>{user?.userInformation?.apellido}</Text>
+            <Text>{user?.userInformation?.celular}</Text>
             <FAB
                 title="+"
                 onPress={() => {

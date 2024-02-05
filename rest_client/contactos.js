@@ -19,11 +19,10 @@ export const getAllContacts = (fnRefreshList) => {
     // )
     fetch(URL + "contactos")
         .then((response) => {
-            console.log("ssssssssssssss");
             return response.json();
         })
         .then((body) => {
-            console.log(body);
+            // console.log(body);
             fnRefreshList(body);
         });
 };
