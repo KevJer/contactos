@@ -11,7 +11,7 @@ export const UserState = ({ children }) => {
             user: null
         })
     );
-
+    const [state, dispatch] = useReducer(UserReducer, initialValues);
     const hanldeInformation = React.useCallback((data) => {
         dispatch({ type: HANLDE_INFORMATION, payload: data });
     }, []);
